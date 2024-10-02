@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Additional styling to ensure full-height sections */
+        body { 
+            overflow-y: hidden;     
+            overflow-x: hidden; 
+         } 
+        .full-height {
+            height: 100vh;
+        }
+        .bordered {
+            border: 1px solid black;
+        }
+
+        #bg {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        #clusters_info {
+            overflow-y: auto; /* Enables vertical scrolling */
+            max-height: 65vh; /* Sets the maximum height */
+            scrollbar-width: thin; /* Firefox thin scrollbar */
+            scrollbar-color: #888 #f1f1f1; /* Thumb and track color for Firefox */
+        }
+
+        /* WebKit scrollbar styling */
+        #clusters_info::-webkit-scrollbar {
+            width: 8px; /* Width of the scrollbar */
+        }
+
+        #clusters_info::-webkit-scrollbar-thumb {
+            background-color: #888; /* Color of the scrollbar thumb */
+            border-radius: 10px; /* Rounded corners for the scrollbar thumb */
+        }
+
+        #clusters_info::-webkit-scrollbar-thumb:hover {
+            background-color: #555; /* Color on hover */
+        }
+
+        #clusters_info::-webkit-scrollbar-track {
+            background: #f1f1f1; /* Background of the scrollbar track */
+            border-radius: 10px; /* Rounded corners for the scrollbar track */
+        }
+        .custom_border {
+            border: 2px solid black !important;
+        }
+    </style>
+    <!-- Vega and Vega-Lite libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+    <div class="container-fluid full-height py-3 px-4">
+        <div class="row h-100">
+            <!-- Left Sidebar -->
+            <div class="col-2 custom_border d-flex flex-column justify-content-between" style="z-index: 999; max-height: 95vh;">
+                <div class="p-2 my-2" style="border: 3px solid black !important;;">
+                    <p>Description and project detail text will go here</p>
+                </div>
+                <hr class="my-2 border-dark w-100">
+               
+                <div id="clusters_info" class="mb-3" style="overflow-y: auto; max-height: 79vh;" >
+
+                </div>
+            </div>
+            
+            <!-- Middle Section (3D Graph) -->
+            
+            <div class="col-7 px-2">
+                <div class="custom_border d-flex flex-column align-items-center justify-content-center h-100" id="middle-section" style="max-height: 95vh;">
+                    <canvas id="plot"></canvas>
+                </div>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div class="col-3 custom_border d-flex flex-column justify-content-between" style="z-index: 999; max-height: 95vh;">
+                <div class="p-2 d-flex justify-content-center align-items-center">
+                    <!-- Profile picture and stats -->
+                    <div class="d-flex text-center align-items-center">
+                        <img src="profholder.jpg" alt="Profile" class="img-fluid" id="prf_picture" style="max-width: 6vw;"> 
+                        <div class="d-block" id="imgPath"></div>
+                        <div class="d-block">
+                            <p class="mx-3 my-0" style="font-weight: 500;  color: #555" id="friends"># of friends:</p>
+                            <p  class="mx-3 my-0" style="font-weight: 500;  color: #555" id="followers"># of followers:</p>
+                            <p class="mx-3 my-0" style="font-weight: 500;  color: #555" id="tweets"># of status:</p>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-3 border-dark w-100">
+                <div class="p-2">
+                    <h5 class="text-center" style="font-size: 1.3vw; font-weight: 600; color: #555;">Nearest Neighbors</h5>
+                    <div class="d-flex justify-content-between" id="neighbors">
+                        <!-- Neighbor Images -->
+                        <img src="profholder.jpg" alt="Neighbor" id="nb1" class="img-fluid " style="max-width: 3.6vw;">
+                        <img src="profholder.jpg" alt="Neighbor" id="nb2" class="img-fluid " style="max-width: 3.6vw;">
+                        <img src="profholder.jpg" alt="Neighbor" id="nb3" class="img-fluid " style="max-width: 3.6vw;">
+                        <img src="profholder.jpg" alt="Neighbor" id="nb4" class="img-fluid " style="max-width: 3.6vw;">
+                        <img src="profholder.jpg" alt="Neighbor" id="nb5" class="img-fluid " style="max-width: 3.6vw;">
+                        <img src="profholder.jpg" alt="Neighbor" id="nb6" class="img-fluid " style="max-width: 3.6vw;"> 
+                    </div>
+                </div>
+                <hr class="my-3 border-dark w-100">
+                <div class="p-0 mb-4">
+                    <!-- Histogram #1 -->
+                     <div class="mt-2">
+                        <div style="height: 100%; width: 100%; box-sizing: border-box;"  id="vega-histogram">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="hist.js" type="module"></script>
+    <script src="main.js" type="module"></script>    
+
+
+
+</body>
+</html>
